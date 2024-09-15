@@ -5,23 +5,33 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ronimaciel.WalletApp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.ronimaciel.WalletApp"
     },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icons/logo.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "91418c59-6359-4b07-8549-39a146e1a96c"
+      }
     }
   }
 }
