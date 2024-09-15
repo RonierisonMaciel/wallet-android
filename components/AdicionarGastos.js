@@ -80,6 +80,7 @@ export default function AdicionarGastos({ transacoes, setTransacoes, adicionarGa
         onChangeValue={setValor}
         style={styles.input}
         placeholder="Valor do gasto"
+        placeholderTextColor="#696969"
         prefix="R$ "
         delimiter="."
         separator=","

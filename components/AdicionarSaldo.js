@@ -3,19 +3,19 @@ import { View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import CurrencyInput from 'react-native-currency-input';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useNavigation } from '@react-navigation/native'; // Importa o hook
 
-export default function AdicionarSaldo({ adicionarSaldo, saldoAtual }) {
+export default function AdicionarSaldo({ adicionarSaldo, saldoAtual, isCarteiraLimpa }) {
   const [saldo, setSaldo] = useState(null);
   const [isSaldoInicializado, setIsSaldoInicializado] = useState(false);
-  
-  const navigation = useNavigation(); // Usa o hook para obter o objeto de navegação
 
   useEffect(() => {
     if (saldoAtual > 0) {
       setIsSaldoInicializado(true);
+    } else if (isCarteiraLimpa) {
+      // Se a carteira for limpa, resetamos o estado
+      setIsSaldoInicializado(false);
     }
-  }, [saldoAtual]);
+  }, [saldoAtual, isCarteiraLimpa]);
 
   const handleAdicionarSaldo = () => {
     if (saldo !== null) {
@@ -32,6 +32,7 @@ export default function AdicionarSaldo({ adicionarSaldo, saldoAtual }) {
         onChangeValue={setSaldo}
         style={styles.input}
         placeholder="Digite o valor do saldo"
+        placeholderTextColor="#696969"
         prefix="R$ "
         delimiter="."
         separator=","
@@ -45,16 +46,7 @@ export default function AdicionarSaldo({ adicionarSaldo, saldoAtual }) {
         style={styles.button}
         icon={() => <Icon name="attach-money" size={20} color="#fff" />}
       >
-        {isSaldoInicializado ? "Atualizar saldo" : "Adicionar saldo"}
-      </Button>
-
-      <Button
-        mode="contained"
-        onPress={() => navigation.navigate('AdicionarGastos')} // Use o hook para navegação
-        style={styles.gastosButton}
-        icon={() => <Icon name="shopping-cart" size={20} color="#fff" />}
-      >
-        Gastos
+        {isSaldoInicializado ? "Atualizar" : "Adicionar"}
       </Button>
     </View>
   );
@@ -77,11 +69,6 @@ const styles = StyleSheet.create({
   button: {
     marginVertical: 10,
     backgroundColor: '#333',
-    paddingHorizontal: 20,
-  },
-  gastosButton: {
-    marginVertical: 10,
-    backgroundColor: '#1E88E5',
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
   },
 });
