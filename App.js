@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Importar AsyncStorage
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import AdicionarGastos from './components/AdicionarGastos';
 import ResumoGastos from './components/ResumoGastos';
 
@@ -57,6 +57,18 @@ export default function App() {
     setTransacoes([...transacoes, novaTransacao]);
   };
 
+  // Função para limpar a carteira (saldo e transações)
+  const limparCarteira = async () => {
+    try {
+      await AsyncStorage.removeItem('@carteira_saldo');
+      await AsyncStorage.removeItem('@carteira_transacoes');
+      setSaldoAtual(0); // Limpa o saldo
+      setTransacoes([]); // Limpa as transações
+    } catch (e) {
+      console.log('Erro ao limpar a carteira do AsyncStorage', e);
+    }
+  };
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -72,6 +84,7 @@ export default function App() {
               saldoAtual={saldoAtual}
               transacoes={transacoes}
               adicionarSaldo={adicionarSaldo}
+              limparCarteira={limparCarteira} // Passando a função para limpar a carteira
             />
           )}
         </Stack.Screen>
