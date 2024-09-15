@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
 import AdicionarSaldo from './AdicionarSaldo';
 import Header from './Header';
 
-export default function ResumoGastos({ saldoAtual, transacoes, adicionarSaldo, navigation }) {
+export default function ResumoGastos({ saldoAtual, transacoes, adicionarSaldo, limparCarteira, navigation }) {
   // Função para calcular a média de gastos
   const calcularMediaGastos = () => {
     if (transacoes.length === 0) return 0;
@@ -17,28 +18,25 @@ export default function ResumoGastos({ saldoAtual, transacoes, adicionarSaldo, n
     return saldoAtual - totalGastos;
   };
 
-  // Função para formatar os valores monetários no estilo brasileiro
-  const formatarMoeda = (valor) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(valor);
-  };
-
-  const handleAdicionarSaldo = (valor) => {
-    adicionarSaldo(valor);
-  };
-
   return (
     <View style={styles.container}>
-      <Header title="Resumo da carteira" />
-
+      <Header title="Resumo da Carteira" />
+      
       <View style={styles.contentContainer}>
-        <Text style={styles.saldoText}>Saldo atual: {formatarMoeda(calcularSaldoRestante())}</Text>
-        <Text style={styles.mediaText}>Média dos gastos: {formatarMoeda(calcularMediaGastos())}</Text>
+        <Text style={styles.saldoText}>Saldo Atual: R$ {calcularSaldoRestante().toFixed(2)}</Text>
+        <Text style={styles.mediaText}>Média dos Gastos: R$ {calcularMediaGastos().toFixed(2)}</Text>
 
-        <AdicionarSaldo adicionarSaldo={handleAdicionarSaldo} />
+        <AdicionarSaldo adicionarSaldo={adicionarSaldo} />
 
+        {/* Botão para limpar a carteira */}
+        <Button
+          mode="contained"
+          onPress={limparCarteira}
+          style={styles.button}
+        >
+          Limpar Carteira
+        </Button>
+        
       </View>
     </View>
   );
