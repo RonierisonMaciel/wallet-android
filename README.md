@@ -16,7 +16,6 @@ Wallet é um aplicativo de gerenciamento de finanças pessoais simples e eficaz,
   <img src="./assets/IMG_5467.PNG" alt="Resumo da Carteira" width="250"/>
   <img src="./assets/IMG_5468.PNG" alt="Adicionar Gastos" width="250"/>
   <img src="./assets/IMG_5469.PNG" alt="Gastos e Limpar Carteira" width="250"/>
-  <img src="./assets/IMG_5470.PNG" alt="Limpar Carteira" width="250"/>
 </div>
 
 ## Tecnologias utilizadas
